@@ -13,7 +13,7 @@ class CreateCommentTable extends Migration
      */
     public function up()
     {
-        Schema::create('comment', function (Blueprint $table) {
+        Schema::create('comments', function (Blueprint $table) {
             $table->increments('id');
             $table->string('comment', 140)->nullable($value = false);
             $table->integer('user_id')->unsigned();
@@ -21,7 +21,7 @@ class CreateCommentTable extends Migration
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('post_id')->references('id')->on('post')->onDelete('cascade');
+            $table->foreign('post_id')->references('id')->on('posts')->onDelete('cascade');
         });
     }
 

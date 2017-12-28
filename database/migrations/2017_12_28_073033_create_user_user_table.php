@@ -13,7 +13,7 @@ class CreateUserUserTable extends Migration
      */
     public function up()
     {
-        Schema::create('author_followed', function (Blueprint $table) {
+        Schema::create('authors_followed', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned();
             $table->integer('author_id')->unsigned();

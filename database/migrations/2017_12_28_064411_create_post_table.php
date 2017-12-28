@@ -13,7 +13,7 @@ class CreatePostTable extends Migration
      */
     public function up()
     {
-        Schema::create('post', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
             $table->increments('id');
             $table->string('title')->nullable($value = false);
             $table->string('content', 1000)->nullable($value = false);
