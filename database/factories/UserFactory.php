@@ -14,10 +14,24 @@ use Faker\Generator as Faker;
 */
 
 $factory->define(App\User::class, function (Faker $faker) {
+    static $password;
+    
     return [
-        'name' => $faker->name,
+        'name' => $faker->firstName,
+        'last_name' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
-        'password' => '$2y$10$TKh8H1.PfQx37YgCzwiKb.KjNyWgaHb9cbcoQgdIVFlYg7B77UdFm', // secret
+        'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
+        'avatar' => $faker->imageUrl(300, 300, 'people'),
+        'bio' => $faker->realText(random_int(20, 160)),
     ];
+});
+
+$factory->define(App\Post::class, function (Faker $faker) {
+	return [
+        'title' => $faker->realText(random_int(10, 30)),
+        'content' => $faker->realText(random_int(20, 160)),
+        'image' => $faker->imageUrl(600, 338),
+        
+	];
 });
