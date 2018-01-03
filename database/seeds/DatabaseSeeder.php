@@ -11,6 +11,18 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // $this->call(UsersTableSeeder::class);
+        $users = factory(App\User::class)->times(10)->create();
+
+        $users->each(function(App\User $user) use ($users) {
+            factory(App\Post::class)
+                ->times(20)
+                ->create([
+                    'user_id' => $user->id,
+                ]);
+
+                $user->follows()->sync(
+                    $users->random(5)
+                );
+        });
     }
 }
